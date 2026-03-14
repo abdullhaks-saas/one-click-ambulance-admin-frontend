@@ -54,25 +54,22 @@ export function Topbar({ onMenuClick, onLogoutClick }: TopbarProps) {
         
         {/* Decorative Topbar Icons like reference: Search, Bell, Message */}
         <div className="hidden sm:flex items-center gap-3">
-          <button className="h-10 w-10 rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors flex items-center justify-center relative">
+          <button className="h-10 w-10 rounded-full  shadow shadow-gray-700 bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors flex items-center justify-center relative">
             <Bell className="h-4 w-4" />
             <span className="absolute top-0 right-0 h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-black dark:ring-white"></span>
           </button>
           
-          <button className="h-10 w-10 rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors flex items-center justify-center">
+          <button className="h-10 w-10 rounded-full shadow shadow-gray-700 bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors flex items-center justify-center">
             <Search className="h-4 w-4" />
           </button>
           
-          <button className="h-10 w-10 rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors flex items-center justify-center relative">
+          <button className="h-10 w-10 rounded-full shadow shadow-gray-700 bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors flex items-center justify-center relative">
             <MessageSquare className="h-4 w-4" />
             <span className="absolute top-0 right-0 h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-black dark:ring-white"></span>
           </button>
         </div>
 
-        {/* Desktop Action Button matching reference */}
-        <Button className="hidden sm:flex rounded-full bg-red-600 hover:bg-red-700 text-white shadow-sm shadow-red-600/20 px-6 h-10 font-medium tracking-wide">
-          Create new order
-        </Button>
+       
 
         {/* Profile Dropdown */}
         <DropdownMenu>

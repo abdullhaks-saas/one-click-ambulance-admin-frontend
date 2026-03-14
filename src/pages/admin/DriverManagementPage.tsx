@@ -2,7 +2,13 @@ import { useState, useEffect, useCallback } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { Select } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
 import { DriverTable } from './drivers/DriverTable';
 import { DriverDetailModal } from './drivers/DriverDetailModal';
@@ -114,17 +120,20 @@ export function DriverManagementPage() {
           <div className="flex items-center gap-2">
             <Label htmlFor="status" className="sr-only">Status</Label>
             <Select
-              id="status"
               value={status || 'all'}
-              onChange={(e) => setStatus((e.target.value === 'all' ? '' : e.target.value) as DriverStatus | '')}
-              className="w-[140px]"
+              onValueChange={(v) => setStatus((v === 'all' ? '' : v) as DriverStatus | '')}
             >
-              <option value="all">All</option>
-              <option value="pending">Pending</option>
-              <option value="approved">Approved</option>
-              <option value="rejected">Rejected</option>
-              <option value="suspended">Suspended</option>
-              <option value="blocked">Blocked</option>
+              <SelectTrigger id="status" className="w-[140px]">
+                <SelectValue placeholder="Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="pending">Pending</SelectItem>
+                <SelectItem value="approved">Approved</SelectItem>
+                <SelectItem value="rejected">Rejected</SelectItem>
+                <SelectItem value="suspended">Suspended</SelectItem>
+                <SelectItem value="blocked">Blocked</SelectItem>
+              </SelectContent>
             </Select>
           </div>
         </div>

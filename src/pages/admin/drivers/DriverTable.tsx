@@ -7,14 +7,8 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { MoreHorizontal, Eye, Check, X, Ban, Unlock } from 'lucide-react';
+import { ActionsDropdown } from '@/components/ui/actions-dropdown';
+import { Eye, Check, X, Ban, Unlock } from 'lucide-react';
 import type { DriverListItem } from '@/services/api/admin-drivers.api';
 
 const statusVariant: Record<string, 'default' | 'secondary' | 'warning' | 'success' | 'destructive'> = {
@@ -69,39 +63,16 @@ export function DriverTable({
             </TableCell>
             <TableCell className="hidden sm:table-cell">{Number(d.rating).toFixed(1)}</TableCell>
             <TableCell className="text-right">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-8 w-8">
-                    <MoreHorizontal className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => onView(d.id)}>
-                    <Eye className="h-4 w-4" />
-                    View Details
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => onApprove(d.id)}>
-                    <Check className="h-4 w-4" />
-                    Approve
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => onReject(d.id)}>
-                    <X className="h-4 w-4" />
-                    Reject
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => onSuspend(d.id)}>
-                    <Ban className="h-4 w-4" />
-                    Suspend
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => onBlock(d.id)}>
-                    <Ban className="h-4 w-4" />
-                    Block
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => onUnblock(d.id)}>
-                    <Unlock className="h-4 w-4" />
-                    Unblock
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <ActionsDropdown
+                actions={[
+                  { label: 'View Details', icon: Eye, onClick: () => onView(d.id) },
+                  { label: 'Approve', icon: Check, onClick: () => onApprove(d.id) },
+                  { label: 'Reject', icon: X, onClick: () => onReject(d.id) },
+                  { label: 'Suspend', icon: Ban, onClick: () => onSuspend(d.id) },
+                  { label: 'Block', icon: Ban, onClick: () => onBlock(d.id) },
+                  { label: 'Unblock', icon: Unlock, onClick: () => onUnblock(d.id) },
+                ]}
+              />
             </TableCell>
           </TableRow>
         ))}

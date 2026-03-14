@@ -3,7 +3,13 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AmbulanceTable } from './ambulances/AmbulanceTable';
 import { AmbulanceDetailModal } from './ambulances/AmbulanceDetailModal';
@@ -138,21 +144,20 @@ export function AmbulanceManagementPage() {
               Status
             </Label>
             <Select
-              id="status"
               value={status || 'all'}
-              onChange={(e) =>
-                setStatus(
-                  (e.target.value === 'all' ? '' : e.target.value) as
-                    | AmbulanceStatus
-                    | ''
-                )
+              onValueChange={(v) =>
+                setStatus((v === 'all' ? '' : v) as AmbulanceStatus | '')
               }
-              className="w-[140px]"
             >
-              <option value="all">All</option>
-              <option value="pending">Pending</option>
-              <option value="approved">Approved</option>
-              <option value="suspended">Suspended</option>
+              <SelectTrigger id="status" className="w-[140px]">
+                <SelectValue placeholder="Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="pending">Pending</SelectItem>
+                <SelectItem value="approved">Approved</SelectItem>
+                <SelectItem value="suspended">Suspended</SelectItem>
+              </SelectContent>
             </Select>
           </div>
         </div>
