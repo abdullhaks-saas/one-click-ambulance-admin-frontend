@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Topbar } from './Topbar';
 import { Sidenav, MobileSidenav } from './Sidenav';
+import { DocumentViewerProvider } from '@/components/document';
 import {
   Dialog,
   DialogContent,
@@ -27,6 +28,7 @@ export function AdminLayout() {
   }
 
   return (
+    <DocumentViewerProvider>
     <div className="flex h-screen overflow-hidden bg-slate-100 dark:bg-slate-950 font-sans selection:bg-red-500/30">
       <Sidenav
         mobileOpen={mobileNavOpen}
@@ -70,5 +72,6 @@ export function AdminLayout() {
         </DialogContent>
       </Dialog>
     </div>
+    </DocumentViewerProvider>
   );
 }

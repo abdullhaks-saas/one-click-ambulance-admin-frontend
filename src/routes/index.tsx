@@ -5,6 +5,7 @@ import { AdminLoginPage } from '@/pages/admin/AdminLoginPage';
 import { AdminDashboardPage } from '@/pages/admin/AdminDashboardPage';
 import { DriverManagementPage } from '@/pages/admin/DriverManagementPage';
 import { AmbulanceManagementPage } from '@/pages/admin/AmbulanceManagementPage';
+import { UserManagementPage } from '@/pages/admin/UserManagementPage';
 import { ComingSoonPage } from '@/pages/admin/ComingSoonPage';
 
 export const router = createBrowserRouter([
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
       { index: true, element: <Navigate to="/admin/dashboard" replace /> },
       { path: 'dashboard', element: <AdminDashboardPage /> },
       { path: 'drivers', element: <DriverManagementPage /> },
+      { path: 'users', element: <UserManagementPage /> },
       { path: 'ambulances', element: <AmbulanceManagementPage /> },
       { path: 'bookings', element: <ComingSoonPage /> },
       { path: 'zones', element: <ComingSoonPage /> },

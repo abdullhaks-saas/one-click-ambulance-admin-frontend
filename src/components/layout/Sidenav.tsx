@@ -10,7 +10,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Sun,
-  Moon
+  Moon,
+  Users,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/stores/auth.store';
@@ -20,6 +21,7 @@ import logo from '@/assets/onclick-logo.png';
 const navItems: { to: string; label: string; icon: React.ElementType; badge?: number }[] = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/admin/drivers', label: 'Active Drivers', icon: FileText },
+  { to: '/admin/users', label: 'Users', icon: Users },
   { to: '/admin/ambulances', label: 'Ambulances', icon: Ambulance },
   { to: '/admin/coming-soon', label: 'Orders', icon: FileText },
   { to: '/admin/coming-soon', label: 'Map Overview', icon: MapPin },

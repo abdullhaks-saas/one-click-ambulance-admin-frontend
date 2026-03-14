@@ -91,7 +91,7 @@ export function AdminLoginPage() {
               className="absolute inset-0 h-full w-full object-cover opacity-90 transition-transform duration-1000 hover:scale-105"
             />
             {/* Subtle Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-white/20 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-white/60 via-white/20 to-transparent" />
 
             {/* Watermark / Logo Text */}
             <div className="absolute left-10 top-10 flex items-center gap-2">

@@ -205,6 +205,18 @@ export function DriverManagementPage() {
         driver={detailDriver}
         loading={detailLoading}
         onClose={() => setDetailDriver(null)}
+        onDocumentVerified={
+          detailDriver
+            ? async () => {
+                try {
+                  const { data } = await adminDriversApi.getById(detailDriver.id);
+                  setDetailDriver(data);
+                } catch {
+                  // keep current data on refresh failure
+                }
+              }
+            : undefined
+        }
       />
 
       {confirmModal && (

@@ -7,6 +7,7 @@ export interface DriverListItem {
   mobile_number: string;
   name: string | null;
   email: string | null;
+  profile_photo?: string | null;
   status: DriverStatus;
   rating: number;
   total_rides: number;
@@ -69,4 +70,10 @@ export const adminDriversApi = {
 
   unblock: (driver_id: string) =>
     axiosInstance.post<{ message: string }>('/admin/unblock-driver', { driver_id }),
+
+  verifyDocument: (document_id: string, status: 'verified' | 'rejected') =>
+    axiosInstance.post<{ message: string }>('/admin/driver-document/verify', {
+      document_id,
+      status,
+    }),
 };
