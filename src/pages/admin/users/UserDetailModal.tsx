@@ -38,6 +38,17 @@ export function UserDetailModal({ user, loading, onClose }: UserDetailModalProps
           <p className="py-4 text-sm text-slate-500">No user data.</p>
         ) : (
           <div className="space-y-4">
+             {user.profile_photo_url && (
+              <section>
+                <h4 className="mb-2 font-medium text-slate-700 dark:text-slate-300">Profile Photo</h4>
+                <img
+                  src={user.profile_photo_url}
+                  alt="Profile"
+                  className="h-24 w-24 rounded-lg object-cover"
+                />
+              </section>
+            )}
+
             <section>
               <h4 className="mb-2 font-medium text-slate-700 dark:text-slate-300">Profile</h4>
               <div className="grid gap-2 text-sm">
@@ -56,17 +67,6 @@ export function UserDetailModal({ user, loading, onClose }: UserDetailModalProps
                 </p>
               </div>
             </section>
-
-            {user.profile_photo_url && (
-              <section>
-                <h4 className="mb-2 font-medium text-slate-700 dark:text-slate-300">Profile Photo</h4>
-                <img
-                  src={user.profile_photo_url}
-                  alt="Profile"
-                  className="h-24 w-24 rounded-lg object-cover"
-                />
-              </section>
-            )}
 
             <section>
               <h4 className="mb-2 font-medium text-slate-700 dark:text-slate-300">Ride History</h4>

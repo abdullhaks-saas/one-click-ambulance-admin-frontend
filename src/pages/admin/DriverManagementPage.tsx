@@ -115,7 +115,7 @@ export function DriverManagementPage() {
   return (
     <div className="space-y-4 text-slate-950 dark:text-slate-50">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-xl font-semibold">Driver Management</h1>
+        <h1 className="text-xl font-semibold">driver management</h1>
         <div className="flex flex-wrap items-center gap-2">
           <div className="flex items-center gap-2">
             <Label htmlFor="status" className="sr-only">Status</Label>
@@ -127,12 +127,12 @@ export function DriverManagementPage() {
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All</SelectItem>
-                <SelectItem value="pending">Pending</SelectItem>
-                <SelectItem value="approved">Approved</SelectItem>
-                <SelectItem value="rejected">Rejected</SelectItem>
-                <SelectItem value="suspended">Suspended</SelectItem>
-                <SelectItem value="blocked">Blocked</SelectItem>
+                <SelectItem value="all">all</SelectItem>
+                <SelectItem value="pending">pending</SelectItem>
+                <SelectItem value="approved">approved</SelectItem>
+                <SelectItem value="rejected">rejected</SelectItem>
+                <SelectItem value="suspended">suspended</SelectItem>
+                <SelectItem value="blocked">blocked</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -141,7 +141,7 @@ export function DriverManagementPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Drivers</CardTitle>
+          <CardTitle>drivers</CardTitle>
         </CardHeader>
         <CardContent>
           {loading ? (

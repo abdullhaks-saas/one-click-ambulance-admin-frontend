@@ -42,6 +42,18 @@ export function AmbulanceDetailModal({
           <p className="py-4 text-sm text-slate-500">No ambulance data.</p>
         ) : (
           <div className="space-y-4">
+
+            {ambulance.photo_url && (
+              <section>
+                <h4 className="mb-2 font-medium text-slate-700 dark:text-slate-300">Profile Photo</h4>
+                <img
+                  src={ambulance.photo_url}
+                  alt="Profile"
+                  className="h-24 w-24 rounded-lg object-cover"
+                />
+              </section>
+            )}
+            
             <section>
               <h4 className="mb-2 font-medium text-slate-700 dark:text-slate-300">
                 Basic Info

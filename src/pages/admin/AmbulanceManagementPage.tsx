@@ -125,7 +125,7 @@ export function AmbulanceManagementPage() {
   return (
     <div className="space-y-4 text-slate-950 dark:text-slate-50">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-xl font-semibold">Ambulance Management</h1>
+        <h1 className="text-xl font-semibold">ambulance management</h1>
         <div className="flex flex-wrap items-center gap-2">
           <div className="flex items-center gap-2">
             <Label htmlFor="search" className="sr-only">

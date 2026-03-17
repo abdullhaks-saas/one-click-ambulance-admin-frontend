@@ -113,7 +113,7 @@ export function UserManagementPage() {
   return (
     <div className="space-y-4 text-slate-950 dark:text-slate-50">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-xl font-semibold">User Management</h1>
+        <h1 className="text-xl font-semibold">user management</h1>
         <div className="flex flex-wrap items-center gap-2">
           <form onSubmit={handleSearchSubmit} className="flex items-center gap-2">
             <Label htmlFor="search" className="sr-only">Search</Label>
@@ -153,7 +153,7 @@ export function UserManagementPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Users</CardTitle>
+          <CardTitle>users</CardTitle>
         </CardHeader>
         <CardContent>
           {loading ? (

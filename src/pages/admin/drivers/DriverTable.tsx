@@ -65,12 +65,12 @@ export function DriverTable({
             <TableCell className="text-right">
               <ActionsDropdown
                 actions={[
-                  { label: 'View Details', icon: Eye, onClick: () => onView(d.id) },
-                  { label: 'Approve', icon: Check, onClick: () => onApprove(d.id) },
-                  { label: 'Reject', icon: X, onClick: () => onReject(d.id) },
-                  { label: 'Suspend', icon: Ban, onClick: () => onSuspend(d.id) },
-                  { label: 'Block', icon: Ban, onClick: () => onBlock(d.id) },
-                  { label: 'Unblock', icon: Unlock, onClick: () => onUnblock(d.id) },
+                  { label: 'view details', icon: Eye, onClick: () => onView(d.id) },
+                  { label: 'approve', icon: Check, onClick: () => onApprove(d.id) },
+                  { label: 'reject', icon: X, onClick: () => onReject(d.id) },
+                  { label: 'suspend', icon: Ban, onClick: () => onSuspend(d.id) },
+                  { label: 'block', icon: Ban, onClick: () => onBlock(d.id) },
+                  { label: 'unblock', icon: Unlock, onClick: () => onUnblock(d.id) },
                 ]}
               />
             </TableCell>

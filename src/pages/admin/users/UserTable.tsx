@@ -49,7 +49,7 @@ export function UserTable({
             <TableCell className="hidden md:table-cell">{u.email ?? '—'}</TableCell>
             <TableCell>
               <Badge variant={statusVariant[u.is_blocked ? 'blocked' : 'active'] ?? 'secondary'}>
-                {u.is_blocked ? 'Blocked' : 'Active'}
+                {u.is_blocked ? 'blocked' : 'active'}
               </Badge>
             </TableCell>
             <TableCell className="hidden sm:table-cell">
@@ -58,15 +58,15 @@ export function UserTable({
             <TableCell className="text-right">
               <ActionsDropdown
                 actions={[
-                  { label: 'View Details', icon: Eye, onClick: () => onView(u.id) },
+                  { label: 'view details', icon: Eye, onClick: () => onView(u.id) },
                   {
-                    label: 'Block',
+                    label: 'block',
                     icon: Ban,
                     onClick: () => onBlock(u.id),
                     visible: !u.is_blocked,
                   },
                   {
-                    label: 'Unblock',
+                    label: 'unblock',
                     icon: Unlock,
                     onClick: () => onUnblock(u.id),
                     visible: !!u.is_blocked,

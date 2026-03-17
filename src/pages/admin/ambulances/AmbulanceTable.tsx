@@ -65,21 +65,21 @@ export function AmbulanceTable({
             <TableCell className="text-right">
               <ActionsDropdown
                 actions={[
-                  { label: 'View Details', icon: Eye, onClick: () => onView(a.id) },
+                  { label: 'view details', icon: Eye, onClick: () => onView(a.id) },
                   {
-                    label: 'Approve',
+                    label: 'approve',
                     icon: Check,
                     onClick: () => onApprove(a.id),
                     visible: a.status === 'pending',
                   },
                   {
-                    label: 'Suspend',
+                    label: 'suspend',
                     icon: Ban,
                     onClick: () => onSuspend(a.id),
                     visible: a.status === 'approved',
                   },
                   {
-                    label: 'Restore',
+                    label: 'restore',
                     icon: RotateCcw,
                     onClick: () => onRestore(a.id),
                     visible: a.status === 'suspended',
