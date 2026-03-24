@@ -52,3 +52,59 @@ body {
 }
 .animate-in { animation: fade-in 0.2s ease-out; }
 .animate-out { animation: fade-out 0.2s ease-in; }
+
+/* Analytics — bar rise, section entrance, horizontal bar fill */
+@keyframes analytics-bar-rise {
+  from {
+    opacity: 0;
+    transform: scaleY(0.12);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+.analytics-bar-rise {
+  transform-origin: bottom center;
+  animation: analytics-bar-rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes analytics-section-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes analytics-hbar-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.analytics-hbar-fill-inner {
+  transform-origin: left center;
+  animation: analytics-hbar-fill 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.analytics-section-in {
+  animation: analytics-section-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .analytics-bar-rise,
+  .analytics-section-in,
+  .analytics-hbar-fill-inner {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -3,15 +3,20 @@ import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
   Ambulance,
-  FileText,
   MapPin,
   Settings,
-  MessageSquare,
   ChevronLeft,
   ChevronRight,
   Sun,
   Moon,
   Users,
+  ClipboardList,
+  Route,
+  DollarSign,
+  UserCog,
+  BarChart3,
+  CreditCard,
+  Banknote,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/stores/auth.store';
@@ -20,13 +25,17 @@ import logo from '@/assets/onclick-logo.png';
 
 const navItems: { to: string; label: string; icon: React.ElementType; badge?: number }[] = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { to: '/admin/drivers', label: 'Active Drivers', icon: FileText },
+  { to: '/admin/drivers', label: 'Drivers', icon: UserCog },
   { to: '/admin/users', label: 'Users', icon: Users },
   { to: '/admin/ambulances', label: 'Ambulances', icon: Ambulance },
-  { to: '/admin/coming-soon', label: 'Orders', icon: FileText },
-  { to: '/admin/coming-soon', label: 'Map Overview', icon: MapPin },
-  { to: '/admin/coming-soon', label: 'Messages', icon: MessageSquare, badge: 2 },
-  { to: '/admin/coming-soon', label: 'Settings', icon: Settings },
+  { to: '/admin/bookings', label: 'Bookings', icon: ClipboardList },
+  { to: '/admin/rides', label: 'Rides & Dispatch', icon: Route },
+  { to: '/admin/pricing', label: 'Pricing', icon: DollarSign },
+  { to: '/admin/payments', label: 'Payments', icon: CreditCard },
+  { to: '/admin/payouts', label: 'Payouts', icon: Banknote },
+  { to: '/admin/zones', label: 'Zones', icon: MapPin },
+  { to: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
+  { to: '/admin/settings', label: 'Settings', icon: Settings },
 ];
 
 interface SidenavProps {

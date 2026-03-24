@@ -1,17 +1,16 @@
 import { axiosInstance } from './axiosInstance';
 
-export interface DashboardMetrics {
-  rides_today: number;
-  active_rides: number;
-  completed_today: number;
-  revenue_today: number;
-  total_users: number;
-  total_drivers: number;
-  approved_drivers: number;
+/** GET /admin/dashboard — Phase 7.1 (backend plan) */
+export interface AdminDashboardMetrics {
+  total_rides_today: number;
   active_drivers: number;
+  completed_rides: number;
+  total_revenue: number;
+  driver_utilization_rate: number;
+  average_response_time_seconds: number;
 }
 
 export const adminDashboardApi = {
   getMetrics: () =>
-    axiosInstance.get<DashboardMetrics>('/admin/dashboard'),
+    axiosInstance.get<AdminDashboardMetrics>('/admin/dashboard'),
 };
