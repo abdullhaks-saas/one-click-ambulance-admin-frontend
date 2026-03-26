@@ -14,6 +14,13 @@ import { ComingSoonPage } from '@/pages/admin/ComingSoonPage';
 import { AdminAnalyticsPage } from '@/pages/admin/AdminAnalyticsPage';
 import { PaymentOverviewPage } from '@/pages/admin/PaymentOverviewPage';
 import { DriverPayoutsPage } from '@/pages/admin/DriverPayoutsPage';
+import { NotificationsPage } from '@/pages/admin/NotificationsPage';
+import { FraudDetectionPage } from '@/pages/admin/FraudDetectionPage';
+import { ReportsPage } from '@/pages/admin/ReportsPage';
+import { SystemSettingsPage } from '@/pages/admin/SystemSettingsPage';
+import { SupportTicketsPage } from '@/pages/admin/SupportTicketsPage';
+import { SystemLogsPage } from '@/pages/admin/SystemLogsPage';
+import { LiveMapPage } from '@/pages/admin/LiveMapPage';
 
 export const router = createBrowserRouter([
   {
@@ -44,8 +51,13 @@ export const router = createBrowserRouter([
       { path: 'payments', element: <PaymentOverviewPage /> },
       { path: 'payouts', element: <DriverPayoutsPage /> },
       { path: 'analytics', element: <AdminAnalyticsPage /> },
-      { path: 'notifications', element: <ComingSoonPage /> },
-      { path: 'settings', element: <ComingSoonPage /> },
+      { path: 'notifications', element: <NotificationsPage /> },
+      { path: 'fraud', element: <FraudDetectionPage /> },
+      { path: 'reports', element: <ReportsPage /> },
+      { path: 'support', element: <SupportTicketsPage /> },
+      { path: 'logs', element: <SystemLogsPage /> },
+      { path: 'live-map', element: <LiveMapPage /> },
+      { path: 'settings', element: <SystemSettingsPage /> },
       { path: '*', element: <ComingSoonPage /> },
     ],
   },

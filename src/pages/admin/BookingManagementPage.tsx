@@ -16,9 +16,11 @@ import { BookingDetailModal } from './bookings/BookingDetailModal';
 import { ConfirmActionModal } from './drivers/ConfirmActionModal';
 import {
   adminBookingsApi,
+  adminZonesApi,
   type BookingListItem,
   type BookingDetail,
   type BookingStatus,
+  type Zone,
 } from '@/services/api';
 import { toast } from 'sonner';
 import { Search, X } from 'lucide-react';
@@ -53,6 +55,8 @@ export function BookingManagementPage() {
   const [to, setTo] = useState('');
   const [search, setSearch] = useState('');
   const [searchInput, setSearchInput] = useState('');
+  const [zoneId, setZoneId] = useState('');
+  const [zones, setZones] = useState<Zone[]>([]);
 
   const [detailBooking, setDetailBooking] = useState<BookingDetail | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
@@ -69,6 +73,7 @@ export function BookingManagementPage() {
         status: status || undefined,
         from: from || undefined,
         to: to || undefined,
+        zone_id: zoneId || undefined,
         search: search || undefined,
       });
       setBookings(data.data);
@@ -79,16 +84,31 @@ export function BookingManagementPage() {
     } finally {
       setLoading(false);
     }
-  }, [page, status, from, to, search]);
+  }, [page, status, from, to, search, zoneId]);
 
   useEffect(() => {
     fetchBookings();
   }, [fetchBookings]);
 
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const { data } = await adminZonesApi.list({ page: 1, limit: 200 });
+        if (!cancelled) setZones(data.data);
+      } catch {
+        if (!cancelled) setZones([]);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   // Reset to page 1 on filter change
   useEffect(() => {
     setPage(1);
-  }, [status, from, to, search]);
+  }, [status, from, to, search, zoneId]);
 
   async function handleView(id: string) {
     setDetailLoading(true);
@@ -132,9 +152,10 @@ export function BookingManagementPage() {
     setTo('');
     setSearch('');
     setSearchInput('');
+    setZoneId('');
   }
 
-  const hasFilters = status || from || to || search;
+  const hasFilters = status || from || to || search || zoneId;
 
   return (
     <div className="space-y-4 text-slate-950 dark:text-slate-50">
@@ -191,6 +212,23 @@ export function BookingManagementPage() {
                 onChange={(e) => setTo(e.target.value)}
                 className="w-[150px]"
               />
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              <Label className="text-xs text-slate-500">Zone</Label>
+              <Select value={zoneId || 'all'} onValueChange={(v) => setZoneId(v === 'all' ? '' : v)}>
+                <SelectTrigger className="w-[165px]">
+                  <SelectValue placeholder="All zones" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All zones</SelectItem>
+                  {zones.map((z) => (
+                    <SelectItem key={z.id} value={z.id}>
+                      {z.zone_name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Search */}

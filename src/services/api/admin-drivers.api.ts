@@ -50,7 +50,14 @@ export interface DriversListResponse {
 }
 
 export const adminDriversApi = {
-  list: (params?: { page?: number; limit?: number; status?: DriverStatus }) =>
+  list: (params?: {
+    page?: number;
+    limit?: number;
+    status?: DriverStatus;
+    search?: string;
+    from?: string;
+    to?: string;
+  }) =>
     axiosInstance.get<DriversListResponse>('/admin/drivers', { params }),
 
   getById: (id: string) =>

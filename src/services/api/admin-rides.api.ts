@@ -68,6 +68,7 @@ export const adminRidesApi = {
     from?: string;
     to?: string;
     booking_id?: string;
+    zone_id?: string;
     search?: string;
   }) => axiosInstance.get<RidesListResponse>('/admin/rides', { params }),
 

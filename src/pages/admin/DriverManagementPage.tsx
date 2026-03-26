@@ -15,6 +15,8 @@ import { DriverDetailModal } from './drivers/DriverDetailModal';
 import { ConfirmActionModal } from './drivers/ConfirmActionModal';
 import { adminDriversApi, type DriverListItem, type DriverDetail, type DriverStatus } from '@/services/api';
 import { toast } from 'sonner';
+import { Search } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 
 export function DriverManagementPage() {
   const [drivers, setDrivers] = useState<DriverListItem[]>([]);
@@ -22,6 +24,10 @@ export function DriverManagementPage() {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [status, setStatus] = useState<DriverStatus | ''>('');
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
+  const [search, setSearch] = useState('');
+  const [searchInput, setSearchInput] = useState('');
   const [detailDriver, setDetailDriver] = useState<DriverDetail | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
   const [confirmModal, setConfirmModal] = useState<{
@@ -40,6 +46,9 @@ export function DriverManagementPage() {
         page,
         limit: 10,
         status: status || undefined,
+        from: from || undefined,
+        to: to || undefined,
+        search: search.trim() || undefined,
       });
       setDrivers(data.data);
       setMeta(data.meta);
@@ -49,11 +58,20 @@ export function DriverManagementPage() {
     } finally {
       setLoading(false);
     }
-  }, [page, status]);
+  }, [page, status, from, to, search]);
 
   useEffect(() => {
     fetchDrivers();
   }, [fetchDrivers]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [status, from, to, search]);
+
+  function handleSearchSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSearch(searchInput.trim());
+  }
 
   async function handleView(id: string) {
     setDetailLoading(true);
@@ -116,7 +134,41 @@ export function DriverManagementPage() {
     <div className="space-y-4 text-slate-950 dark:text-slate-50">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-xl font-semibold">driver management</h1>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-end gap-2">
+          <form onSubmit={handleSearchSubmit} className="flex items-center gap-2">
+            <Label htmlFor="drv-search" className="sr-only">
+              Search
+            </Label>
+            <Input
+              id="drv-search"
+              type="search"
+              placeholder="Name, mobile, email…"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              className="w-[180px]"
+            />
+            <Button type="submit" variant="outline" size="icon" title="Search">
+              <Search className="h-4 w-4" />
+            </Button>
+          </form>
+          <div className="flex flex-col gap-1">
+            <Label className="text-xs text-slate-500">From</Label>
+            <Input
+              type="date"
+              value={from}
+              onChange={(e) => setFrom(e.target.value)}
+              className="w-[140px]"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <Label className="text-xs text-slate-500">To</Label>
+            <Input
+              type="date"
+              value={to}
+              onChange={(e) => setTo(e.target.value)}
+              className="w-[140px]"
+            />
+          </div>
           <div className="flex items-center gap-2">
             <Label htmlFor="status" className="sr-only">Status</Label>
             <Select

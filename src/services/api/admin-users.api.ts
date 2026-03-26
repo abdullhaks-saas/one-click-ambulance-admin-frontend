@@ -43,6 +43,8 @@ export const adminUsersApi = {
     limit?: number;
     status?: UserStatus;
     search?: string;
+    from?: string;
+    to?: string;
   }) =>
     axiosInstance.get<UsersListResponse>('/admin/users', { params }),
 

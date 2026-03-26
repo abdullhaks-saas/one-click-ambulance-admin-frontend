@@ -100,6 +100,7 @@ export function PaymentOverviewPage() {
   const [payLoading, setPayLoading] = useState(true);
 
   const [failedPage, setFailedPage] = useState(1);
+  const [failedPayStatus, setFailedPayStatus] = useState<'all' | 'failed' | 'pending'>('all');
   const [failedFrom, setFailedFrom] = useState('');
   const [failedTo, setFailedTo] = useState('');
   const [failedSearch, setFailedSearch] = useState('');
@@ -175,6 +176,7 @@ export function PaymentOverviewPage() {
       const { data } = await adminPaymentsApi.listFailed({
         page: failedPage,
         limit: 12,
+        status: failedPayStatus === 'all' ? undefined : failedPayStatus,
         from: failedFrom || undefined,
         to: failedTo || undefined,
         search: failedSearch || undefined,
@@ -188,7 +190,7 @@ export function PaymentOverviewPage() {
     } finally {
       setFailedLoading(false);
     }
-  }, [failedPage, failedFrom, failedTo, failedSearch]);
+  }, [failedPage, failedPayStatus, failedFrom, failedTo, failedSearch]);
 
   useEffect(() => {
     void loadRecon();
@@ -212,7 +214,7 @@ export function PaymentOverviewPage() {
 
   useEffect(() => {
     setFailedPage(1);
-  }, [failedFrom, failedTo, failedSearch]);
+  }, [failedPayStatus, failedFrom, failedTo, failedSearch]);
 
   async function handleRetry(paymentId: string) {
     setRetryingId(paymentId);
@@ -640,12 +642,13 @@ export function PaymentOverviewPage() {
                     Sync with Razorpay when a payment id exists
                   </CardDescription>
                 </div>
-                {(failedFrom || failedTo || failedSearch) && (
+                {(failedFrom || failedTo || failedSearch || failedPayStatus !== 'all') && (
                   <Button
                     variant="ghost"
                     size="sm"
                     className="gap-1 self-start text-slate-500"
                     onClick={() => {
+                      setFailedPayStatus('all');
                       setFailedFrom('');
                       setFailedTo('');
                       setFailedSearch('');
@@ -660,6 +663,24 @@ export function PaymentOverviewPage() {
             </CardHeader>
             <CardContent className="space-y-4 pt-4">
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end">
+                <div className="space-y-2">
+                  <Label className="text-xs text-slate-500">Status</Label>
+                  <Select
+                    value={failedPayStatus}
+                    onValueChange={(v) =>
+                      setFailedPayStatus(v as 'all' | 'failed' | 'pending')
+                    }
+                  >
+                    <SelectTrigger className="w-full min-w-[140px] border-slate-200/80 bg-white/70 backdrop-blur-sm dark:border-slate-600 dark:bg-slate-900/50 sm:w-[160px]">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">Failed & pending</SelectItem>
+                      <SelectItem value="failed">Failed only</SelectItem>
+                      <SelectItem value="pending">Pending only</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
                 <div className="space-y-2">
                   <Label className="text-xs text-slate-500">From</Label>
                   <Input

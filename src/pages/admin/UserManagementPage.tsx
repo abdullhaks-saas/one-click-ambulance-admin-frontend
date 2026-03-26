@@ -31,6 +31,8 @@ export function UserManagementPage() {
   const [status, setStatus] = useState<UserStatus>('all');
   const [search, setSearch] = useState('');
   const [searchInput, setSearchInput] = useState('');
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
   const [detailUser, setDetailUser] = useState<UserDetail | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
   const [confirmModal, setConfirmModal] = useState<{
@@ -48,6 +50,8 @@ export function UserManagementPage() {
         limit: 10,
         status: status === 'all' ? undefined : status,
         search: search.trim() || undefined,
+        from: from || undefined,
+        to: to || undefined,
       });
       setUsers(data.data);
       setMeta(data.meta);
@@ -57,11 +61,15 @@ export function UserManagementPage() {
     } finally {
       setLoading(false);
     }
-  }, [page, status, search]);
+  }, [page, status, search, from, to]);
 
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [from, to]);
 
   function handleSearchSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -114,9 +122,11 @@ export function UserManagementPage() {
     <div className="space-y-4 text-slate-950 dark:text-slate-50">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-xl font-semibold">user management</h1>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-end gap-2">
           <form onSubmit={handleSearchSubmit} className="flex items-center gap-2">
-            <Label htmlFor="search" className="sr-only">Search</Label>
+            <Label htmlFor="search" className="sr-only">
+              Search
+            </Label>
             <Input
               id="search"
               type="search"
@@ -129,8 +139,28 @@ export function UserManagementPage() {
               <Search className="h-4 w-4" />
             </Button>
           </form>
+          <div className="flex flex-col gap-1">
+            <Label className="text-xs text-slate-500">From</Label>
+            <Input
+              type="date"
+              value={from}
+              onChange={(e) => setFrom(e.target.value)}
+              className="w-[140px]"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <Label className="text-xs text-slate-500">To</Label>
+            <Input
+              type="date"
+              value={to}
+              onChange={(e) => setTo(e.target.value)}
+              className="w-[140px]"
+            />
+          </div>
           <div className="flex items-center gap-2">
-            <Label htmlFor="status" className="sr-only">Status</Label>
+            <Label htmlFor="status" className="sr-only">
+              Status
+            </Label>
             <Select
               value={status}
               onValueChange={(v) => {
@@ -164,7 +194,7 @@ export function UserManagementPage() {
             </div>
           ) : users.length === 0 ? (
             <div className="py-12 text-center text-sm text-slate-500">
-              {search || status !== 'all'
+              {search || status !== 'all' || from || to
                 ? 'No users match your filters. Try adjusting search or status.'
                 : 'No users found.'}
             </div>

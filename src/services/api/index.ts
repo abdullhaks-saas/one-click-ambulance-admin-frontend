@@ -12,3 +12,8 @@ export * from './admin-pricing.api';
 export * from './admin-zones.api';
 export * from './admin-payments.api';
 export * from './admin-payouts.api';
+export * from './admin-notifications.api';
+export * from './admin-fraud.api';
+export * from './admin-reports.api';
+export * from './admin-system.api';
+export * from './admin-support.api';

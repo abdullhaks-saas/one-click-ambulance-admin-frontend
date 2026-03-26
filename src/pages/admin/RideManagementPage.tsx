@@ -16,9 +16,11 @@ import { RideDetailModal } from './rides/RideDetailModal';
 import { DispatchPanel } from './rides/DispatchPanel';
 import {
   adminRidesApi,
+  adminZonesApi,
   type RideListItem,
   type RideDetail,
   type RideStatusEnum,
+  type Zone,
 } from '@/services/api';
 import { toast } from 'sonner';
 import { Search, X } from 'lucide-react';
@@ -46,6 +48,8 @@ export function RideManagementPage() {
   const [to, setTo] = useState('');
   const [search, setSearch] = useState('');
   const [searchInput, setSearchInput] = useState('');
+  const [zoneId, setZoneId] = useState('');
+  const [zones, setZones] = useState<Zone[]>([]);
 
   const [detailRide, setDetailRide] = useState<RideDetail | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
@@ -59,6 +63,7 @@ export function RideManagementPage() {
         status: status || undefined,
         from: from || undefined,
         to: to || undefined,
+        zone_id: zoneId || undefined,
         search: search || undefined,
       });
       setRides(data.data);
@@ -69,15 +74,30 @@ export function RideManagementPage() {
     } finally {
       setLoading(false);
     }
-  }, [page, status, from, to, search]);
+  }, [page, status, from, to, search, zoneId]);
 
   useEffect(() => {
     fetchRides();
   }, [fetchRides]);
 
   useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const { data } = await adminZonesApi.list({ page: 1, limit: 200 });
+        if (!cancelled) setZones(data.data);
+      } catch {
+        if (!cancelled) setZones([]);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
     setPage(1);
-  }, [status, from, to, search]);
+  }, [status, from, to, search, zoneId]);
 
   async function handleView(id: string) {
     setDetailLoading(true);
@@ -104,9 +124,10 @@ export function RideManagementPage() {
     setTo('');
     setSearch('');
     setSearchInput('');
+    setZoneId('');
   }
 
-  const hasFilters = status || from || to || search;
+  const hasFilters = status || from || to || search || zoneId;
 
   return (
     <div className="space-y-6 text-slate-950 dark:text-slate-50">
@@ -161,6 +182,23 @@ export function RideManagementPage() {
                 onChange={(e) => setTo(e.target.value)}
                 className="w-[150px]"
               />
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              <Label className="text-xs text-slate-500">Zone</Label>
+              <Select value={zoneId || 'all'} onValueChange={(v) => setZoneId(v === 'all' ? '' : v)}>
+                <SelectTrigger className="w-[165px]">
+                  <SelectValue placeholder="All zones" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All zones</SelectItem>
+                  {zones.map((z) => (
+                    <SelectItem key={z.id} value={z.id}>
+                      {z.zone_name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             <form onSubmit={handleSearchSubmit} className="flex flex-col gap-1.5">

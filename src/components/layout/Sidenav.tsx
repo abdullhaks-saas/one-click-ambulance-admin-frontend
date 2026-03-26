@@ -17,6 +17,12 @@ import {
   BarChart3,
   CreditCard,
   Banknote,
+  Bell,
+  ShieldAlert,
+  FileText,
+  HeadphonesIcon,
+  ScrollText,
+  Map,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/stores/auth.store';
@@ -25,6 +31,7 @@ import logo from '@/assets/onclick-logo.png';
 
 const navItems: { to: string; label: string; icon: React.ElementType; badge?: number }[] = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { to: '/admin/live-map', label: 'Live Map', icon: Map },
   { to: '/admin/drivers', label: 'Drivers', icon: UserCog },
   { to: '/admin/users', label: 'Users', icon: Users },
   { to: '/admin/ambulances', label: 'Ambulances', icon: Ambulance },
@@ -35,6 +42,11 @@ const navItems: { to: string; label: string; icon: React.ElementType; badge?: nu
   { to: '/admin/payouts', label: 'Payouts', icon: Banknote },
   { to: '/admin/zones', label: 'Zones', icon: MapPin },
   { to: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
+  { to: '/admin/reports', label: 'Reports', icon: FileText },
+  { to: '/admin/fraud', label: 'Fraud Detection', icon: ShieldAlert },
+  { to: '/admin/notifications', label: 'Notifications', icon: Bell },
+  { to: '/admin/support', label: 'Support Tickets', icon: HeadphonesIcon },
+  { to: '/admin/logs', label: 'System Logs', icon: ScrollText },
   { to: '/admin/settings', label: 'Settings', icon: Settings },
 ];
 
