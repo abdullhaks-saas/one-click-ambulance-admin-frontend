@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 import { Loader2, IndianRupee } from 'lucide-react';
 
 interface PricingField {
-  key: keyof Pick<PricingRule, 'base_fare' | 'per_km_price' | 'emergency_charge' | 'night_charge' | 'minimum_fare'>;
+  key: keyof Pick<PricingRule, 'base_fare' | 'per_km_price' | 'emergency_charge' | 'night_charge' | 'minimum_fare' | 'toll_charge'>;
   label: string;
   description: string;
 }
@@ -24,6 +24,7 @@ const PRICING_FIELDS: PricingField[] = [
   { key: 'emergency_charge', label: 'Emergency Charge', description: 'Extra for emergency bookings' },
   { key: 'night_charge', label: 'Night Charge', description: 'Extra charge for night hours' },
   { key: 'minimum_fare', label: 'Minimum Fare', description: 'Minimum bill amount' },
+  { key: 'toll_charge', label: 'Toll Charge', description: 'Default toll fee applied to rides' },
 ];
 
 interface PricingEditModalProps {
@@ -45,6 +46,7 @@ export function PricingEditModal({ rule, onClose, onSaved }: PricingEditModalPro
         emergency_charge: String(rule.emergency_charge),
         night_charge: String(rule.night_charge),
         minimum_fare: String(rule.minimum_fare),
+        toll_charge: String(rule.toll_charge),
       });
       setErrors({});
     }
@@ -75,6 +77,7 @@ export function PricingEditModal({ rule, onClose, onSaved }: PricingEditModalPro
         emergency_charge: parseFloat(values.emergency_charge),
         night_charge: parseFloat(values.night_charge),
         minimum_fare: parseFloat(values.minimum_fare),
+        toll_charge: parseFloat(values.toll_charge),
       });
       toast.success(`Pricing updated for ${rule.ambulance_type_name}`);
       onSaved(data);

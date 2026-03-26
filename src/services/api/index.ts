@@ -17,3 +17,5 @@ export * from './admin-fraud.api';
 export * from './admin-reports.api';
 export * from './admin-system.api';
 export * from './admin-support.api';
+export * from './admin-ratings.api';
+export * from './admin-alerts.api';

@@ -9,6 +9,7 @@ export interface PricingRule {
   emergency_charge: number;
   night_charge: number;
   minimum_fare: number;
+  toll_charge: number;
   created_at: string;
   updated_at: string;
 }
@@ -20,6 +21,7 @@ export interface UpdatePricingDto {
   emergency_charge?: number;
   night_charge?: number;
   minimum_fare?: number;
+  toll_charge?: number;
 }
 
 export const adminPricingApi = {

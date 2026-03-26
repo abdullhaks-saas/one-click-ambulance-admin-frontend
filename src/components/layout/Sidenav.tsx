@@ -23,6 +23,7 @@ import {
   HeadphonesIcon,
   ScrollText,
   Map,
+  Star,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/stores/auth.store';
@@ -41,6 +42,7 @@ const navItems: { to: string; label: string; icon: React.ElementType; badge?: nu
   { to: '/admin/payments', label: 'Payments', icon: CreditCard },
   { to: '/admin/payouts', label: 'Payouts', icon: Banknote },
   { to: '/admin/zones', label: 'Zones', icon: MapPin },
+  { to: '/admin/ratings', label: 'Ratings & Reviews', icon: Star },
   { to: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
   { to: '/admin/reports', label: 'Reports', icon: FileText },
   { to: '/admin/fraud', label: 'Fraud Detection', icon: ShieldAlert },
@@ -93,7 +95,10 @@ export function Sidenav({
       </div>
 
       {/* Nav links */}
-      <nav className="flex flex-1 flex-col gap-2 overflow-y-auto px-4 py-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      <nav className={cn(
+        "flex flex-1 flex-col overflow-y-auto py-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]",
+        shrunk ? "gap-1 px-2 items-center" : "gap-1 px-2"
+      )}>
         {navItems.map((item) => {
           const Icon = item.icon;
           return (
@@ -104,8 +109,8 @@ export function Sidenav({
               title={shrunk ? item.label : undefined}
               className={({ isActive }) =>
                 cn(
-                  'flex items-center rounded-2xl transition-all duration-200 relative group overflow-hidden',
-                  shrunk ? 'mx-auto w-12 h-12 justify-center' : 'gap-4 px-4 py-3.5 mx-0',
+                  'flex items-center rounded-2xl transition-all duration-200 relative group overflow-hidden shrink-0',
+                  shrunk ? 'w-12 h-12 justify-center' : 'gap-4 px-4 py-3',
                   isActive
                     ? 'bg-red-600 text-white shadow-md shadow-red-600/10'
                     : 'text-zinc-500 hover:bg-zinc-50 hover:text-black dark:hover:bg-slate-800 dark:hover:text-white'

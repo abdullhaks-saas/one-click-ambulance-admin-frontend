@@ -25,6 +25,7 @@ export function PricingCard({ rule, onEdit }: PricingCardProps) {
     { label: 'Emergency Charge', value: rule.emergency_charge },
     { label: 'Night Charge', value: rule.night_charge },
     { label: 'Minimum Fare', value: rule.minimum_fare },
+    { label: 'Toll Charge', value: rule.toll_charge },
   ];
 
   return (

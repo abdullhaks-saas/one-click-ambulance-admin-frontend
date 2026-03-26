@@ -10,7 +10,7 @@ import { BookingManagementPage } from '@/pages/admin/BookingManagementPage';
 import { RideManagementPage } from '@/pages/admin/RideManagementPage';
 import { PricingManagementPage } from '@/pages/admin/PricingManagementPage';
 import { ZoneManagementPage } from '@/pages/admin/ZoneManagementPage';
-import { ComingSoonPage } from '@/pages/admin/ComingSoonPage';
+import { AdminNotFoundPage } from '@/pages/admin/AdminNotFoundPage';
 import { AdminAnalyticsPage } from '@/pages/admin/AdminAnalyticsPage';
 import { PaymentOverviewPage } from '@/pages/admin/PaymentOverviewPage';
 import { DriverPayoutsPage } from '@/pages/admin/DriverPayoutsPage';
@@ -21,6 +21,7 @@ import { SystemSettingsPage } from '@/pages/admin/SystemSettingsPage';
 import { SupportTicketsPage } from '@/pages/admin/SupportTicketsPage';
 import { SystemLogsPage } from '@/pages/admin/SystemLogsPage';
 import { LiveMapPage } from '@/pages/admin/LiveMapPage';
+import { RatingsReviewsPage } from '@/pages/admin/RatingsReviewsPage';
 
 export const router = createBrowserRouter([
   {
@@ -57,8 +58,9 @@ export const router = createBrowserRouter([
       { path: 'support', element: <SupportTicketsPage /> },
       { path: 'logs', element: <SystemLogsPage /> },
       { path: 'live-map', element: <LiveMapPage /> },
+      { path: 'ratings', element: <RatingsReviewsPage /> },
       { path: 'settings', element: <SystemSettingsPage /> },
-      { path: '*', element: <ComingSoonPage /> },
+      { path: '*', element: <AdminNotFoundPage /> },
     ],
   },
   {
